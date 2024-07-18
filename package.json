@@ -2,15 +2,18 @@
   "name": "nlw-journey-elysiajs",
   "version": "1.0.50",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "db:migrate": "pnpm drizzle-kit generate"
   },
   "dependencies": {
-    "elysia": "latest"
+    "drizzle-orm": "^0.32.0",
+    "elysia": "latest",
+    "postgres": "^3.4.4"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "drizzle-kit": "^0.23.0"
   },
   "module": "src/index.js"
 }
