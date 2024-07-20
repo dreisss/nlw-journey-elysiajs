@@ -1,7 +1,14 @@
 import { Elysia } from 'elysia'
+import { cors } from '@elysiajs/cors'
 
-const app = new Elysia().get('/', () => 'Hello Elysia').listen(3000)
+import { createTrip } from './routes/create-trip'
+import { confirmTrip } from './routes/confirm-trip'
 
-console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`,
-)
+const corsPlugin = cors({
+  origin: '*',
+})
+
+export const app = new Elysia().use(corsPlugin).use(createTrip).use(confirmTrip).listen(3000)
+export const baseUrl = `${app.server?.hostname}:${app.server?.port}`
+
+console.log(`🦊 Elysia is running at ${baseUrl}`)

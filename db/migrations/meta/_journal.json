@@ -8,6 +8,20 @@
       "when": 1721342840770,
       "tag": "0000_solid_madripoor",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1721345448861,
+      "tag": "0001_fresh_starfox",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1721407100489,
+      "tag": "0002_pink_ma_gnuci",
+      "breakpoints": true
     }
   ]
 }
