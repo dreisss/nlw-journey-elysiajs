@@ -12,6 +12,7 @@ export const trips = pgTable('trips', {
 
 export const tripsReations = relations(trips, ({ many }) => ({
   participants: many(participants),
+  activities: many(activities),
 }))
 
 export type Trip = typeof trips.$inferSelect
@@ -36,3 +37,36 @@ export const participantsRelations = relations(participants, ({ one }) => ({
 
 export type Participant = typeof participants.$inferSelect
 export type NewParticipant = typeof participants.$inferInsert
+
+export const activities = pgTable('activities', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  title: varchar('name', { length: 128 }),
+  occursAt: timestamp('occours_at').notNull(),
+
+  tripId: uuid('trip_id').notNull(),
+})
+
+export const activitiesRelations = relations(activities, ({ one }) => ({
+  trip: one(trips, {
+    fields: [activities.tripId],
+    references: [trips.id],
+  }),
+}))
+
+export type Activity = typeof activities.$inferSelect
+export type NewActivity = typeof activities.$inferInsert
+
+export const links = pgTable('links', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  title: varchar('title'),
+  url: varchar('url'),
+
+  tripId: uuid('trip_id').notNull(),
+})
+
+export const linksRelations = relations(links, ({ one }) => ({
+  trip: one(trips, {
+    fields: [links.tripId],
+    references: [trips.id],
+  }),
+}))
