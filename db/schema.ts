@@ -13,6 +13,7 @@ export const trips = pgTable('trips', {
 export const tripsReations = relations(trips, ({ many }) => ({
   participants: many(participants),
   activities: many(activities),
+  links: many(links),
 }))
 
 export type Trip = typeof trips.$inferSelect
@@ -40,7 +41,7 @@ export type NewParticipant = typeof participants.$inferInsert
 
 export const activities = pgTable('activities', {
   id: uuid('id').defaultRandom().primaryKey(),
-  title: varchar('name', { length: 128 }),
+  title: varchar('name', { length: 128 }).notNull(),
   occursAt: timestamp('occours_at').notNull(),
 
   tripId: uuid('trip_id').notNull(),
@@ -58,8 +59,8 @@ export type NewActivity = typeof activities.$inferInsert
 
 export const links = pgTable('links', {
   id: uuid('id').defaultRandom().primaryKey(),
-  title: varchar('title'),
-  url: varchar('url'),
+  title: varchar('title').notNull(),
+  url: varchar('url').notNull(),
 
   tripId: uuid('trip_id').notNull(),
 })
