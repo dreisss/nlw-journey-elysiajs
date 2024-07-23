@@ -30,14 +30,18 @@ export const createActivity = new Elysia().post(
       throw new Error('Invalid activity date!')
     }
 
-    return await db
-      .insert(activities)
-      .values({
-        title,
-        occursAt,
-        tripId: trip.id,
-      })
-      .returning({ id: activities.id })
+    const activity = (
+      await db
+        .insert(activities)
+        .values({
+          title,
+          occursAt,
+          tripId: trip.id,
+        })
+        .returning({ id: activities.id })
+    )[0]
+
+    return { id: activity.id }
   },
   {
     params: createActivityParamsSchema,

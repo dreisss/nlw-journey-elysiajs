@@ -75,7 +75,7 @@ export const createTrip = new Elysia().post(
 
     console.log(nodemailer.getTestMessageUrl(message))
 
-    return trip
+    return { id: trip.id }
   },
   { body: createTripSchema },
 )

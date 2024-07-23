@@ -1,13 +1,18 @@
-import { Elysia } from 'elysia'
 import { cors } from '@elysiajs/cors'
+import { Elysia } from 'elysia'
 
-import { createTrip } from './routes/create-trip'
-import { confirmTrip } from './routes/confirm-trip'
 import { confirmParticipant } from './routes/confirm-participant'
+import { confirmTrip } from './routes/confirm-trip'
 import { createActivity } from './routes/create-activity'
-import { getActivities } from './routes/get-activities'
+import { createInvite } from './routes/create-invite'
 import { createLink } from './routes/create-link'
+import { createTrip } from './routes/create-trip'
+import { getActivities } from './routes/get-activities'
 import { getLinks } from './routes/get-links'
+import { getParticipant } from './routes/get-participant'
+import { getParticipants } from './routes/get-participants'
+import { getTripDetails } from './routes/get-trip-details'
+import { updateTrip } from './routes/update-trip'
 
 const corsPlugin = cors({
   origin: '*',
@@ -15,9 +20,14 @@ const corsPlugin = cors({
 
 export const app = new Elysia()
   .use(corsPlugin)
+  .use(createInvite)
   .use(createTrip)
   .use(confirmTrip)
+  .use(updateTrip)
+  .use(getTripDetails)
   .use(confirmParticipant)
+  .use(getParticipants)
+  .use(getParticipant)
   .use(createActivity)
   .use(getActivities)
   .use(createLink)

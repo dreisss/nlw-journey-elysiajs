@@ -19,20 +19,24 @@ export const createLink = new Elysia().post(
       where: (trip, { eq }) => eq(trip.id, params.id),
     })
 
-    const { title, url } = body
-
     if (!trip) {
       throw new Error('Trip not found!')
     }
 
-    return await db
-      .insert(links)
-      .values({
-        title,
-        url,
-        tripId: trip.id,
-      })
-      .returning({ id: links.id })
+    const { title, url } = body
+
+    const link = (
+      await db
+        .insert(links)
+        .values({
+          title,
+          url,
+          tripId: trip.id,
+        })
+        .returning({ id: links.id })
+    )[0]
+
+    return { id: link.id }
   },
   {
     params: createLinkParamsSchema,
