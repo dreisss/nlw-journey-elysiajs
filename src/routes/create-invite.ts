@@ -5,7 +5,6 @@ import { db } from '../lib/drizzle'
 import { participants } from '../../db/schema'
 import dayjs from '../lib/dayjs'
 import { getMailClient } from '../lib/mail'
-import { apiBaseUrl } from '..'
 
 const createInviteParamsSchema = t.Object({
   id: t.String({ format: 'uuid' }),
@@ -41,7 +40,7 @@ export const createInvite = new Elysia().post(
     const formattedStartDate = dayjs(trip.startsAt).format('LL')
     const formattedEndDate = dayjs(trip.endsAt).format('LL')
 
-    const confirmationLink = `http://${apiBaseUrl}/participants/${participant.id}/confirm`
+    const confirmationLink = `${process.env.BASE_URL}/participants/${participant.id}/confirm`
 
     const mail = await getMailClient()
     const message = await mail.sendMail({

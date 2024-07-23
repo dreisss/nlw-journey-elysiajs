@@ -32,8 +32,6 @@ export const app = new Elysia()
   .use(getActivities)
   .use(createLink)
   .use(getLinks)
-  .listen(3000)
-export const apiBaseUrl = `${app.server?.hostname}:${app.server?.port}`
-export const appBaseUrl = ''
+  .listen(process.env.PORT)
 
-console.log(`🦊 Elysia is running at ${apiBaseUrl}`)
+console.log(`🦊 Elysia is running at ${process.env.BASE_URL}`)

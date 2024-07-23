@@ -1,7 +1,6 @@
 import { eq } from 'drizzle-orm'
 import { Elysia, t } from 'elysia'
 
-import { appBaseUrl } from '..'
 import { participants } from '../../db/schema'
 import { db } from '../lib/drizzle'
 
@@ -21,7 +20,7 @@ export const confirmParticipant = new Elysia().get(
     }
 
     if (participant.isConfirmed) {
-      return redirect(`http://${appBaseUrl}/trips/${participant.tripId}`)
+      return redirect(`${process.env.APP_BASE_URL}/trips/${participant.tripId}`)
     }
 
     await db.update(participants).set({ isConfirmed: true }).where(eq(participants.id, participant.id))

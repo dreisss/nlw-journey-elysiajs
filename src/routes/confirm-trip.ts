@@ -2,7 +2,6 @@ import { Elysia, t } from 'elysia'
 import { eq } from 'drizzle-orm'
 import nodemailer from 'nodemailer'
 
-import { apiBaseUrl, appBaseUrl } from '..'
 import { trips } from '../../db/schema'
 import dayjs from '../lib/dayjs'
 import { db } from '../lib/drizzle'
@@ -29,7 +28,7 @@ export const confirmTrip = new Elysia().get(
     }
 
     if (trip.isConfirmed) {
-      return redirect(`http:${appBaseUrl}/trips/${trip.id}`)
+      return redirect(`${process.env.APP_BASE_URL}/trips/${trip.id}`)
     }
 
     await db.update(trips).set({ isConfirmed: true }).where(eq(trips.id, trip.id))
@@ -41,7 +40,7 @@ export const confirmTrip = new Elysia().get(
 
     await Promise.all(
       trip.participants.map(async (participant) => {
-        const confirmationLink = `http://${apiBaseUrl}/participants/${participant.id}/confirm`
+        const confirmationLink = `${process.env.BASE_URL}/participants/${participant.id}/confirm`
 
         const message = await mail.sendMail({
           from: {
@@ -69,7 +68,7 @@ export const confirmTrip = new Elysia().get(
       }),
     )
 
-    return redirect(`http:${appBaseUrl}/trips/${trip.id}`)
+    return redirect(`${process.env.APP_BASE_URL}/trips/${trip.id}`)
   },
   { params: confirmTripSchema },
 )
