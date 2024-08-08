@@ -1,6 +1,6 @@
 <img src="./.github/assets/nlw.svg" height="32px" /> &nbsp; &nbsp; <img src="./.github/assets/journey.svg" height="32px" />
 
-Aplicação desenvolvida durante o evento nlw journey da Rocketseat (trilha NodeJs).
+Aplicação desenvolvida durante o evento `nlw journey` da Rocketseat (trilha NodeJs).
 
 Tecnologias utilizadas:
 
