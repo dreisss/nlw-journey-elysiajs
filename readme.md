@@ -1,5 +1,5 @@
-<div align="center">
-  <img src="./.github/assets/nlw-journey.webp" />
+<div>
+  <img src="./.github/assets/nlw-journey.svg" height="48" />
 </div>
 
 <br />
